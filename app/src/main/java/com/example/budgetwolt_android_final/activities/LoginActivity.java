@@ -1,0 +1,76 @@
+package com.example.budgetwolt_android_final.activities;
+
+import static com.example.budgetwolt_android_final.utilities.Constants.VALIDATE_LOGIN_URL;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.example.budgetwolt_android_final.R;
+import com.example.budgetwolt_android_final.utilities.RestOperations;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.io.IOException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+public class LoginActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_login);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+    public void validateLogin(View view) {
+        TextView usernameField = findViewById(R.id.editTextUsername);
+        TextView passwordField = findViewById(R.id.editTextPassword);
+
+        Gson gson = new Gson();
+
+        JsonObject data = new JsonObject();
+        data.addProperty("username", usernameField.getText().toString());
+        data.addProperty("password", passwordField.getText().toString());
+
+        Executor executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        executor.execute(() -> {
+            try {
+                String response = RestOperations.post(VALIDATE_LOGIN_URL, gson.toJson(data));
+
+                handler.post(() -> {
+                    if (!response.equals("ERROR")) {
+                        Log.d("SUCCESS", "Validate Login - OK 200");
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG);
+                    }
+                });
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public void openRegisterActivity(View view) {
+        Log.d("success", "openRegisterActivity: ");
+    }
+}
