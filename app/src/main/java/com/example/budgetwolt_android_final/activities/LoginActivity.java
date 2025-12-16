@@ -2,6 +2,7 @@ package com.example.budgetwolt_android_final.activities;
 
 import static com.example.budgetwolt_android_final.utilities.Constants.VALIDATE_LOGIN_URL;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -59,6 +60,11 @@ public class LoginActivity extends AppCompatActivity {
                 handler.post(() -> {
                     if (!response.equals("ERROR") && !response.isEmpty()) {
                         Log.d("SUCCESS", "Validate Login - OK 200");
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("userJson", response);
+                        startActivity(intent);
+
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
                     }

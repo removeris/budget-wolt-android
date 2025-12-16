@@ -5,4 +5,7 @@
     <string name="password_placeholder">Password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
+    <string name="restaurants_label">Restaurants</string>
+    <string name="myOrders_button">My Orders</string>
+    <string name="myProfile_button">My Profile</string>
 </resources>
