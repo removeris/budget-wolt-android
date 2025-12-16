@@ -57,10 +57,10 @@ public class LoginActivity extends AppCompatActivity {
                 String response = RestOperations.post(VALIDATE_LOGIN_URL, gson.toJson(data));
 
                 handler.post(() -> {
-                    if (!response.equals("ERROR")) {
+                    if (!response.equals("ERROR") && !response.isEmpty()) {
                         Log.d("SUCCESS", "Validate Login - OK 200");
                     } else {
-                        Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG);
+                        Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
                     }
                 });
 
