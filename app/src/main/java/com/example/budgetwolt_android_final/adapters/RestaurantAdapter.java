@@ -12,14 +12,14 @@ import android.widget.TextView;
 import com.example.budgetwolt_android_final.R;
 import com.example.budgetwolt_android_final.models.Restaurant;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantAdapter extends BaseAdapter {
 
     private Activity activity;
-    private ArrayList<Restaurant> restaurants;
+    private List<Restaurant> restaurants;
 
-    public RestaurantAdapter(Activity activity, ArrayList<Restaurant> restaurants) {
+    public RestaurantAdapter(Activity activity, List<Restaurant> restaurants) {
         this.activity = activity;
         this.restaurants = restaurants;
     }

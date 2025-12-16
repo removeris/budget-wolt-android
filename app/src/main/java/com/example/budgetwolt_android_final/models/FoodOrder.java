@@ -4,11 +4,7 @@ package com.example.budgetwolt_android_final.models;
 import java.time.LocalDate;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 
 public class FoodOrder {
 

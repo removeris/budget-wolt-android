@@ -4,11 +4,7 @@ package com.example.budgetwolt_android_final.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 public class BasicUser extends User  {
     protected String address;
 
@@ -24,5 +20,13 @@ public class BasicUser extends User  {
         this.myOrders = new ArrayList<FoodOrder>();
         this.myReviews = new ArrayList<Review>();
         this.feedback = new ArrayList<Review>();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

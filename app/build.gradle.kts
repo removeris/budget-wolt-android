@@ -43,6 +43,4 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.7")
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    implementation("org.projectlombok:lombok:0.11.0")
 }

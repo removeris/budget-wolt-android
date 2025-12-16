@@ -3,11 +3,7 @@ package com.example.budgetwolt_android_final.models;
 
 import java.time.LocalDate;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 public class Driver extends BasicUser {
     private String driverLicense;
     private LocalDate dateOfBirth;
