@@ -21,6 +21,7 @@ public class User implements Serializable {
     protected LocalDate dateModified;
     protected boolean isAdmin;
 
+    public User() {}
     public User(String username, String password, String name, String surname, String phoneNumber) {
         this.username = username;
         this.password = password;

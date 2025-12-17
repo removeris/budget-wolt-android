@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("userJson", response);
+                        Log.d("myINFO", response);
                         startActivity(intent);
 
                     } else {

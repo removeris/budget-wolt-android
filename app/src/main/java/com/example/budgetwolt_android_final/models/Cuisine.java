@@ -7,25 +7,68 @@ public class Cuisine {
 
     private int id;
     private String name;
-    private List<FoodOrder> foodOrders;
-    private Restaurant restaurant;
     private String ingredients;
     private double price;
-    private String instructions;
     private boolean isSpicy;
     private boolean isVegan;
 
     public Cuisine(String name, double price, String ingredients, String instructions, boolean isSpicy, boolean isVegan, Restaurant restaurant) {
         this.name = name;
         this.price = price;
-        this.instructions = instructions;
         this.isSpicy = isSpicy;
         this.isVegan = isVegan;
         this.ingredients = ingredients;
-        this.restaurant = restaurant;
     }
 
     public String toString(){
         return this.name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isSpicy() {
+        return isSpicy;
+    }
+
+    public void setSpicy(boolean spicy) {
+        isSpicy = spicy;
+    }
+
+    public boolean isVegan() {
+        return isVegan;
+    }
+
+    public void setVegan(boolean vegan) {
+        isVegan = vegan;
     }
 }

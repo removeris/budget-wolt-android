@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private User currentUser;
     private RestaurantAdapter restaurantAdapter;
+    private String userInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        String userInfo = intent.getStringExtra("userJson");
+        userInfo = intent.getStringExtra("userJson");
 
         Log.d("INFO", "USER: " + userInfo);
 
@@ -62,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
         currentUser = gson.fromJson(userInfo, User.class);
+        if (currentUser instanceof Driver) {
+            currentUser = gson.fromJson(userInfo, Driver.class);
+        } else if (currentUser instanceof BasicUser) {
+            currentUser = gson.fromJson(userInfo, BasicUser.class);
+        }
 
         if (currentUser instanceof Restaurant) {
             Toast.makeText(MainActivity.this, "Restaurants must use desktop app", Toast.LENGTH_SHORT);
@@ -95,5 +103,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void openProfileActivity(View view) {
+
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+
+        intent.putExtra("userJson", userInfo);
+        startActivity(intent);
+    }
+
+    public void openOrderActivity(View view) {
     }
 }

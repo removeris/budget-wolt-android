@@ -8,18 +8,11 @@ import java.util.List;
 public class BasicUser extends User  {
     protected String address;
 
-    protected List<FoodOrder> myOrders;
 
-    protected List<Review> myReviews;
-
-    protected List<Review> feedback;
-
+    public BasicUser() {}
     public BasicUser(String username, String password, String name, String surname, String phoneNumber, String address) {
         super(username, password, name, surname, phoneNumber);
         this.address = address;
-        this.myOrders = new ArrayList<FoodOrder>();
-        this.myReviews = new ArrayList<Review>();
-        this.feedback = new ArrayList<Review>();
     }
 
     public String getAddress() {
