@@ -2,6 +2,8 @@ package com.example.budgetwolt_android_final.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.time.LocalDate;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -40,6 +44,8 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
+        int userId = intent.getIntExtra("userId", 0);
+        int restaurantId = intent.getIntExtra("restaurantId", 0);
         userInfo = intent.getStringExtra("userJson");
 
         Log.d("INFO", "USER: " + userInfo);
@@ -53,5 +59,12 @@ public class MenuActivity extends AppCompatActivity {
         } else if (currentUser instanceof BasicUser) {
             currentUser = gson.fromJson(userInfo, BasicUser.class);
         }
+
+        Executor executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        executor.execute(() -> {
+
+        });
     }
 }

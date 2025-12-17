@@ -97,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
                         restaurantAdapter = new RestaurantAdapter((Activity) MainActivity.this, restaurants);
                         listViewRestaurants.setAdapter(restaurantAdapter);
 
+                        listViewRestaurants.setOnItemClickListener((parent, view, position, id) -> {
+                            Restaurant restaurant = restaurants.get(position);
+                            Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
+                            menuIntent.putExtra("restaurantId", restaurant.getId());
+                            menuIntent.putExtra("userId", currentUser.getId());
+                            startActivity(menuIntent);
+                        });
+
+
+
                     });
                 } catch (IOException e) {
                     throw new RuntimeException(e);
