@@ -11,6 +11,7 @@ public class Cuisine {
     private double price;
     private boolean isSpicy;
     private boolean isVegan;
+    private int quantity = 0;
 
     public Cuisine(String name, double price, String ingredients, String instructions, boolean isSpicy, boolean isVegan, Restaurant restaurant) {
         this.name = name;
@@ -71,4 +72,6 @@ public class Cuisine {
     public void setVegan(boolean vegan) {
         isVegan = vegan;
     }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }

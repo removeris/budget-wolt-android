@@ -38,4 +38,28 @@ public class FoodOrder {
     public String toString() {
         return "ID: " + id + " " + title + " " + price;
     }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public OrderStatus getStatus() {
+        return this.status;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public Restaurant getRestaurant() {
+        return this.restaurant;
+    }
+
+    public BasicUser getBuyer() {
+        return this.buyer;
+    }
 }

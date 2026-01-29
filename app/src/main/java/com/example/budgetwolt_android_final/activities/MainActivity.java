@@ -124,5 +124,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openOrderActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, OrderHistoryActivity.class);
+        Log.d("INFO_MSG", "openOrderActivity: " + currentUser.getId());
+        intent.putExtra("user", userInfo);
+        intent.putExtra("isDriver", false);
+        startActivity(intent);
     }
 }

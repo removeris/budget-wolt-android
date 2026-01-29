@@ -129,7 +129,6 @@ public class ProfileActivity extends AppCompatActivity {
             driver.setAddress(address);
 
             try {
-                // Convert String back to LocalDate for the object
                 LocalDate dob = LocalDate.parse(dateOfBirthString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 driver.setDateOfBirth(dob);
             } catch (Exception e) {

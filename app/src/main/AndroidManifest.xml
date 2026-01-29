@@ -16,6 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetWolt_Android_Final">
         <activity
+            android:name=".activities.DriverMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.OrderHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.MenuActivity"
             android:exported="false" />
         <activity

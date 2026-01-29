@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.budgetwolt_android_final.R;
+import com.example.budgetwolt_android_final.models.Driver;
 import com.example.budgetwolt_android_final.utilities.RestOperations;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -61,10 +62,32 @@ public class LoginActivity extends AppCompatActivity {
                     if (!response.equals("ERROR") && !response.isEmpty()) {
                         Log.d("SUCCESS", "Validate Login - OK 200");
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        JsonObject userObject = gson.fromJson(response, JsonObject.class);
+
+                        Intent intent;
+
+                        Log.d("ORD_HISTORY", "validateLogin: " + userObject);
+                        Log.d("INFO", "validateLogin: " + response);
+
+                        if (userObject.get("userType").toString().contains("Driver")) {
+                            Log.d("LOGIN_TYPE", "User is a Driver");
+                            intent = new Intent(LoginActivity.this, DriverMainActivity.class);
+                        } else if (userObject.get("userType").toString().contains("Restaurant")) {
+                            Log.d("LOGIN", "validateLogin: BUT USER IS A RESTAURANT THO");
+                            Toast.makeText(LoginActivity.this, "Invalid User. Admins/Restaurants must use desktop app", Toast.LENGTH_LONG).show();
+                            return;
+                        } else if (userObject.get("userType").toString().contains("BasicUser")) {
+                                Log.d("LOGIN_TYPE", "User is a Client");
+                                intent = new Intent(LoginActivity.this, MainActivity.class);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Invalid User. Admins/Restaurants must use desktop app", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+
                         intent.putExtra("userJson", response);
-                        Log.d("myINFO", response);
                         startActivity(intent);
+                        finish();
 
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
@@ -72,12 +95,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         });
     }
 
     public void openRegisterActivity(View view) {
-        Log.d("success", "openRegisterActivity: ");
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 }

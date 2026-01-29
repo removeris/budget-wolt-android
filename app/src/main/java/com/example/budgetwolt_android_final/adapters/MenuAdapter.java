@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.budgetwolt_android_final.R;
+import com.example.budgetwolt_android_final.activities.MenuActivity;
 import com.example.budgetwolt_android_final.models.Cuisine;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class MenuAdapter extends BaseAdapter {
@@ -27,38 +24,53 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return cuisines.size();
-    }
+    public int getCount() { return cuisines.size(); }
 
     @Override
-    public Cuisine getItem(int i) {
-        return cuisines.get(i);
-    }
+    public Cuisine getItem(int i) { return cuisines.get(i); }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
-    }
+    public long getItemId(int i) { return i; }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View menuItem;
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.item_menu, viewGroup, false);
+        }
 
-        LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        menuItem = layoutInflater.inflate(R.layout.item_menu, viewGroup, false);
+        Cuisine cuisine = getItem(i);
 
-        TextView name = menuItem.findViewById(R.id.tvItemName);
-        TextView price = menuItem.findViewById(R.id.tvPrice);
-        TextView ingredients = menuItem.findViewById(R.id.tvIngredients);
-        CheckBox checkBox = menuItem.findViewById(R.id.checkBox);
-
-        Cuisine cuisine = this.getItem(i);
+        TextView name = view.findViewById(R.id.tvItemName);
+        TextView price = view.findViewById(R.id.tvPrice);
+        TextView ingredients = view.findViewById(R.id.tvIngredients);
+        TextView tvQuantity = view.findViewById(R.id.tvQuantity);
+        Button btnPlus = view.findViewById(R.id.btnPlus);
+        Button btnMinus = view.findViewById(R.id.btnMinus);
 
         name.setText(cuisine.getName());
-        price.setText(String.valueOf(cuisine.getPrice()));
+        price.setText(String.format("$%.2f", cuisine.getPrice()));
         ingredients.setText(cuisine.getIngredients());
+        tvQuantity.setText(String.valueOf(cuisine.getQuantity()));
 
-        return menuItem;
+        btnPlus.setOnClickListener(v -> {
+            cuisine.setQuantity(cuisine.getQuantity() + 1);
+            tvQuantity.setText(String.valueOf(cuisine.getQuantity()));
+            if (activity instanceof MenuActivity) {
+                ((MenuActivity) activity).updateOrderTotal();
+            }
+        });
+
+        btnMinus.setOnClickListener(v -> {
+            if (cuisine.getQuantity() > 0) {
+                cuisine.setQuantity(cuisine.getQuantity() - 1);
+                tvQuantity.setText(String.valueOf(cuisine.getQuantity()));
+                if (activity instanceof MenuActivity) {
+                    ((MenuActivity) activity).updateOrderTotal();
+                }
+            }
+        });
+
+        return view;
     }
 }

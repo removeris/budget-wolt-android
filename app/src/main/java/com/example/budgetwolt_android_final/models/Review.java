@@ -18,4 +18,12 @@ public class Review {
         this.commentOwner = commentOwner;
         this.chat = chat;
     }
+
+    public BasicUser getCommentOwner() {
+        return commentOwner;
+    }
+
+    public String getText() {
+        return text;
+    }
 }
